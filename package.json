@@ -1,0 +1,12 @@
+{
+    "name": "lyrics-plus-proxy",
+    "version": "1.0.0",
+    "description": "Proxy server for Lyrics Plus",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cors-anywhere": "^0.4.4"
+    }
+}
