@@ -12,7 +12,12 @@ const ALLOWED_DOMAINS = [
     'music.163.com',
     'raw.githubusercontent.com',
     'github.com',
-    'genius.com'
+    'genius.com',
+    // Apple Music domains for lyrics fetching
+    'music.apple.com',
+    'beta.music.apple.com',
+    'amp-api.music.apple.com',
+    'amp-api-edge.music.apple.com'
 ];
 
 const proxy = cors_proxy.createServer({
@@ -79,6 +84,15 @@ http.createServer((req, res) => {
             req.headers['referer'] = 'https://apic-desktop.musixmatch.com/';
             req.headers['cookie'] = 'x-mxm-token-guid=';
             req.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        }
+
+        // Special handling for Apple Music
+        if (hostname.includes('apple.com')) {
+            req.headers['origin'] = 'https://music.apple.com';
+            req.headers['referer'] = 'https://music.apple.com/';
+            req.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+            // Remove cookies to avoid session issues
+            delete req.headers['cookie'];
         }
 
         proxy.emit('request', req, res);
