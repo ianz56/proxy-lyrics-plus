@@ -17,7 +17,8 @@ const ALLOWED_DOMAINS = [
     'music.apple.com',
     'beta.music.apple.com',
     'amp-api.music.apple.com',
-    'amp-api-edge.music.apple.com'
+    'amp-api-edge.music.apple.com',
+    'lyrics.paxsenix.org'
 ];
 
 const proxy = cors_proxy.createServer({
